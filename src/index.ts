@@ -1,16 +1,13 @@
 import express from 'express'
+import apiRouter from './routes/apiRoutes'
+import connectDB from './config/dbConnect'
 
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-    res.send('Test')
-})
+connectDB()
 
-app.get('/api/:id', (req, res) => {
-    const id = req.params.id
-    res.send(`Hello ${id}`)
-})
+app.use('/api', apiRouter)
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)
